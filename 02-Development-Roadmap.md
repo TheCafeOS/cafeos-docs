@@ -13,6 +13,12 @@ Authors
 
 ---
 
+> **Roadmap note (2026-11-06):** This is the original sprint plan, not a
+> current completion tracker. Actual routes, features, and status values are
+> documented in [the Backend Guide](./04-Backend-Guide.md#current-backend-implementation),
+> [Frontend Guide](./05-Frontend-Guide.md#current-frontend-implementation),
+> and [API reference](./06-API-Documentation.md#verified-current-http-api-reference).
+
 # Purpose
 
 This document defines the development roadmap for CafeOS.
@@ -331,9 +337,11 @@ ORDER_CREATED
 
 ORDER_UPDATED
 
-ORDER_READY
+NOTIFICATION_CREATED
 
-ORDER_SERVED
+TABLES_MERGED
+
+TABLES_UNMERGED
 
 Deliverable
 

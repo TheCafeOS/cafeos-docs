@@ -8,6 +8,11 @@ Status: Active
 
 ---
 
+> **Implementation note (2026-11-06):** The sketches below are retained as
+> design concepts. The **Verified Current Workflows** section at the end records
+> the existing frontend routes and controls; where a sketch differs, current
+> code is authoritative.
+
 # Purpose
 
 This document defines the UI layout of every major screen in CafeOS MVP.
@@ -464,7 +469,7 @@ Timeline
 
 Ready
 
-Served
+COMPLETED
 
 -------------------------------------------
 
@@ -556,7 +561,7 @@ Preparing
 
 Ready
 
-Served
+Completed
 
 +--------------------------------------------+
 
@@ -684,6 +689,86 @@ Customer
 - Cart
 - Order Success
 - Order Tracking
+
+---
+
+---
+
+# Verified Current Workflows
+
+These are implementation-aligned summaries, not pixel-perfect screenshots.
+Actual route and feature availability is described in the
+[Frontend Guide](./05-Frontend-Guide.md#current-frontend-implementation).
+
+## Registration and login
+
+```text
+Register: restaurant details + owner details + password
+    → backend creates restaurant, owner, session and token pair
+Login: email + password
+    → backend creates a new session and returns access + refresh tokens
+    → dashboard
+```
+
+Tokens are stored by the auth utility; they are not shown in the UI. Invalid or
+expired sessions return the user to login.
+
+## Restaurant dashboard and navigation
+
+Owner navigation currently includes Dashboard, Orders, Menu, Tables,
+Employees, Loyalty, Settings, and “Soon” entries for Inventory and Reports.
+Managers and staff have reduced navigation based on role. The dashboard
+includes order/revenue summaries and recent/active orders as provided by the
+backend.
+
+## Menu and categories
+
+The Menu page is the category and menu-item workspace. It supports category
+creation/edit/removal alongside menu item creation/edit/removal, item
+availability, category assignment, food type, image upload and image framing.
+There is no separately routed Categories page.
+
+## Tables and QR ordering
+
+The Tables page manages table names/status, QR codes and merge workflows. A
+customer scans a table QR code and opens `/menu/[qrToken]`; the public page
+shows restaurant branding, table identity, categories and available menu
+items. The QR token identifies the table. The cart supports quantity
+adjustments and checkout; current-order UI exposes active order state/tracking.
+
+## Orders and notifications
+
+The dashboard Orders page displays orders and supports valid status progression
+(`PENDING` → `CONFIRMED` → `PREPARING` → `COMPLETED`, with cancellation where
+allowed). Live events update dashboard/customer state. Notifications are
+available from the dashboard notification controls and are loaded/read/cleared
+through the authenticated API.
+
+## Settings and sessions
+
+```text
+Settings
+  ├─ Restaurant information and branding
+  ├─ Account/password controls
+  └─ Sessions
+       ├─ Active session list: created, last used, expires
+       ├─ Log out current device
+       ├─ Revoke one other session
+       └─ Log out other sessions (individual revocations; current device stays)
+```
+
+The current UI does not expose a “log out all including this device” button.
+The backend API provides logout-all, and the frontend service has a method for
+it, but the settings control for other sessions iterates over individual
+revocation requests. A server revocation warning may be shown if local logout
+completes but server confirmation fails.
+
+## Planned or placeholder screens
+
+Inventory and Reports are shown as “Soon” in navigation and should be treated
+as planned/placeholder workflows rather than completed capabilities. Wireframe
+sketches above that are not reflected in current routes or controls are design
+ideas, not claims about implemented UI.
 
 ---
 

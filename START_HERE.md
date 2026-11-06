@@ -199,6 +199,10 @@ DATABASE
 
 Current MVP Tables
 
+(Original planning baseline; see
+[03 — Database Design](./03-Database-Design.md#current-prisma-schema) for the
+implemented schema and full model inventory.)
+
 Restaurant
 
 Employee
@@ -293,6 +297,9 @@ API DESIGN
 
 Current API style
 
+(Historical endpoint sketch; the current contract is in
+[06 — API Documentation](./06-API-Documentation.md#verified-current-http-api-reference).)
+
 POST /auth/register
 
 POST /auth/login
@@ -301,7 +308,7 @@ GET /tables
 
 POST /tables
 
-PUT /tables/:id
+PATCH /tables/:id
 
 DELETE /tables/:id
 
@@ -309,15 +316,17 @@ GET /categories
 
 POST /categories
 
-PUT /categories/:id
+PATCH /categories/:id
 
 DELETE /categories/:id
 
-GET /tables/:tableId/menu
+GET /public/menu/:qrToken
+
+POST /public/orders/:qrToken
 
 POST /menu
 
-PUT /menu/:id
+PATCH /menu/:id
 
 DELETE /menu/:id
 
@@ -493,13 +502,19 @@ postpone it.
 CURRENT STATUS
 ------------------------------------------------------------
 
-Planning phase is complete.
+Planning is complete and implementation is underway. This startup guide
+retains original planning context, not a live shipped-feature checklist. Use
+the current implementation references for existing behavior:
 
-We are now starting implementation.
+- [03 — Database Design](./03-Database-Design.md#current-prisma-schema)
+- [04 — Backend Guide](./04-Backend-Guide.md#current-backend-implementation)
+- [05 — Frontend Guide](./05-Frontend-Guide.md#current-frontend-implementation)
+- [06 — API Documentation](./06-API-Documentation.md#verified-current-http-api-reference)
+- [07 — System Flow](./07-System-Flow.md#verified-current-flows)
+- [08 — UI Wireframes](./08-UI-Wireframes.md#verified-current-workflows)
 
-The next step is to initialize the backend project and begin Sprint 1.
-
-From this point onward, help us build CafeOS feature by feature until the MVP is production-ready.
+Do not infer that a feature is shipped solely because it appears in the
+original MVP or future-feature lists.
 
 Whenever I ask a question, answer based on the current CafeOS architecture and documentation instead of proposing a completely new architecture.
 
